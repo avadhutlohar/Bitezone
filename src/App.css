@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #3d3d3d;
+}
 .header {
   display: flex;
   justify-content: space-between;
@@ -18,19 +24,20 @@
 .nav > ul > li {
   padding: 10px;
   margin: 10px;
+  
 }
 
-.search {
-  padding: 10px;
+.filterBtn {
+  padding: 5px;
   margin: 10px;
+  border: 1px solid black;
 }
 
 .resCard {
-  width: 200px;
-
-  border: 1px solid black;
-  padding: 10px;
-  margin: 20px;
+  width: 250px;
+  padding: 5px;
+  margin: 10px;
+  background-color: #0f0f0f;
 }
 
 .resLogo {
@@ -42,9 +49,8 @@
   display: flex;
   flex-wrap: wrap;
   padding: 5px;
-  justify-content: space-between;
+  
 }
-
 .resContainer :hover {
   border: 1px solid black;
   cursor: pointer;

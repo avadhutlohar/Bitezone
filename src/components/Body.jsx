@@ -4,7 +4,7 @@ import Shimmer from "./Shimmer";
 
 function Body() {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
-const [filteredResList, setFilteredResList] = useState(listOfRestaurant);
+  const [filteredResList, setFilteredResList] = useState(listOfRestaurant);
 
   const [serchText, setSerchText] = useState("");
   useEffect(() => {
@@ -47,7 +47,9 @@ const [filteredResList, setFilteredResList] = useState(listOfRestaurant);
             onClick={() => {
               console.log(serchText);
               const filteredList = listOfRestaurant.filter((resData) =>
-                resData.info.name.toLowerCase().includes(serchText.toLowerCase())
+                resData.info.name
+                  .toLowerCase()
+                  .includes(serchText.toLowerCase())
               );
               setFilteredResList(filteredList);
             }}

@@ -1,6 +1,7 @@
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import { CDN_URL } from "../utils/constants";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
@@ -23,18 +24,31 @@ const RestaurantMenu = () => {
   const costInRupees = costForTwo ? costForTwo / 100 : "N/A";
 
   return (
-    <div className="flex flex-col justify-between">
-      <h1>{resName || "Restaurant Name Not Available"}</h1>
-      <h3>{cuisines || "Cuisine Types Not Available"}</h3>
-      <h3>{`Cost for two: Rs. ${costInRupees}`}</h3>
+    <div className="container mx-auto my-8 p-8 bg-white shadow-md rounded-md">
+      <h1 className="text-3xl font-bold mb-4">
+        {resName || "Restaurant Name Not Available"}
+      </h1>
+      <h3 className="text-lg mb-2">
+        {cuisines || "Cuisine Types Not Available"}
+      </h3>
+      <h3 className="text-lg mb-4">{`Cost for two: Rs. ${costInRupees}`}</h3>
 
-      <ul>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {itemCard.map((item, index) => (
-          <li key={item?.card?.info?.id}>
-            {item?.card?.info?.name} - Rs. {item?.card?.info?.price / 100}
-          </li>
+          <div
+            key={item?.card?.info?.id}
+            className="bg-gray-100 p-4 rounded-md"
+          >
+            <img
+              src={CDN_URL + item?.card?.info?.imageId}
+              alt={item?.card?.info?.name || "Food Image"}
+              className="w-full h-40 object-cover rounded-md mb-2"
+            />
+            <p className="text-base">{item?.card?.info?.name}</p>
+            <p className="text-base">Rs. {item?.card?.info?.price / 100}</p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

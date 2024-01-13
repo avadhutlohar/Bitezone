@@ -1,8 +1,6 @@
 import React from "react";
 import { CDN_URL } from "../utils/constants";
 
-
-
 function RestaurantCard({ resData }) {
   const { name, cuisines, costForTwo, avgRating, cloudinaryImageId } =
     resData?.info;
@@ -17,12 +15,23 @@ function RestaurantCard({ resData }) {
 
       <div className="p-6">
         <h3 className="text-xl font-semibold mb-2">{name}</h3>
-        <p className="text-gray-600 mb-2">{cuisines.join(', ')}</p>
-        <p className="text-gray-700 mb-2">Cost for Two: ${costForTwo}</p>
+        <p className="text-gray-600 mb-2">{cuisines.join(", ")}</p>
+        <p className="text-gray-700 mb-2">{costForTwo}</p>
         <p className="text-yellow-500">{avgRating} ⭐</p>
       </div>
     </div>
   );
 }
+
+export const withPromotedLable = (RestaurantCard) => {
+  return () => {
+    return (
+      <div>
+        <label htmlFor="">Promoted</label>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
+};
 
 export default RestaurantCard;

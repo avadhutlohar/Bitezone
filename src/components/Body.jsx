@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLable } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { HOME_API_URL } from "../utils/constants";
-
 
 function Body() {
   const [listOfRestaurant, setListOfRestaurant] = useState([]);
   const [filteredResList, setFilteredResList] = useState(listOfRestaurant);
   const [searchText, setSearchText] = useState("");
 
+  const PromotedRestaurantCard = withPromotedLable(RestaurantCard);
   useEffect(() => {
     fetchData();
   }, []);
@@ -19,7 +19,8 @@ function Body() {
     const json = await data.json();
 
     const restaurants =
-      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants || [];
     setListOfRestaurant(restaurants);
     setFilteredResList(restaurants);
   };
@@ -32,7 +33,9 @@ function Body() {
   };
 
   const handleTopRated = () => {
-    const filteredList = listOfRestaurant.filter((resData) => resData.info.avgRating > 4);
+    const filteredList = listOfRestaurant.filter(
+      (resData) => resData.info.avgRating > 4
+    );
     setFilteredResList(filteredList);
   };
 
@@ -66,7 +69,11 @@ function Body() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4">
         {filteredResList.map((resData) => (
           <Link key={resData.info.id} to={`/restaurants/${resData.info.id}`}>
-            <RestaurantCard resData={resData} />
+            {resData.info.promoted ? (
+              <PromotedRestaurantCard resData={resData} />
+            ) : (
+              <RestaurantCard resData={resData} />
+            )}
           </Link>
         ))}
       </div>

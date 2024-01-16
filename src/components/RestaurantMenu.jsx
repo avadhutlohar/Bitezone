@@ -2,6 +2,7 @@ import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import { CDN_URL } from "../utils/constants";
+import RestaurantCategory from "./RestaurantCategory";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
@@ -35,10 +36,14 @@ const RestaurantMenu = () => {
   const costInRupees = costForTwo ? costForTwo / 100 : "N/A";
 
   return (
-    <div className="container mx-auto my-8 p-8 bg-white shadow-md rounded-md">
+    <div className="container mx-auto my-8 p-8 bg-white shadow-md rounded-md ">
+
+    
       <h1 className="text-3xl font-bold mb-4">
         {resName || "Restaurant Name Not Available"}
       </h1>
+
+      {categories?.map((category, index) => <RestaurantCategory key={index} data={category?.card?.card} />)}
       <h3 className="text-lg mb-2">
         {cuisines || "Cuisine Types Not Available"}
       </h3>

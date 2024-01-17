@@ -37,19 +37,20 @@ const RestaurantMenu = () => {
 
   return (
     <div className="container mx-auto my-8 p-8 bg-white shadow-md rounded-md ">
-
-    
       <h1 className="text-3xl font-bold mb-4">
         {resName || "Restaurant Name Not Available"}
       </h1>
 
-      {categories?.map((category, index) => <RestaurantCategory key={index} data={category?.card?.card} />)}
       <h3 className="text-lg mb-2">
         {cuisines || "Cuisine Types Not Available"}
       </h3>
       <h3 className="text-lg mb-4">{`Cost for two: Rs. ${costInRupees}`}</h3>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {categories?.map((category, index) => (
+        <RestaurantCategory key={index} data={category?.card?.card} />
+      ))}
+
+      {/*    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {itemCard.map((item, index) => (
           <div
             key={item?.card?.info?.id}
@@ -64,7 +65,7 @@ const RestaurantMenu = () => {
             <p className="text-base">Rs. {item?.card?.info?.price / 100}</p>
           </div>
         ))}
-      </div>
+        </div>*/}
     </div>
   );
 };

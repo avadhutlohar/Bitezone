@@ -3,16 +3,17 @@ import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import { CDN_URL } from "../utils/constants";
 import RestaurantCategory from "./RestaurantCategory";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
   const resInfo = useRestaurantMenu(resId);
 
+  const [showIndex, setShowIndex] = useState(0);
+
   const itemCard =
     resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card.card
       .itemCards;
-
-  console.log(resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards);
 
   const categories =
     resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
@@ -21,7 +22,6 @@ const RestaurantMenu = () => {
         "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
     );
 
-  console.log(categories);
 
   if (!resInfo || !itemCard) {
     return <Shimmer />;
@@ -47,7 +47,9 @@ const RestaurantMenu = () => {
       <h3 className="text-lg mb-4">{`Cost for two: Rs. ${costInRupees}`}</h3>
 
       {categories?.map((category, index) => (
-        <RestaurantCategory key={index} data={category?.card?.card} />
+        <RestaurantCategory key={index} data={category?.card?.card}
+        isOpen={index === showIndex && true} 
+        setShowIndex={()=>setShowIndex(index)}/>
       ))}
 
       {/*    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

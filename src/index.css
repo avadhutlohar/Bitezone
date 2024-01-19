@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+  
+  .shimmerCard {
+    width: 300px; 
+    height: 200px; 
+    background: linear-gradient(
+      to right,
+      #f6f7f8 0%,
+      #e9ebee 50%,
+      #f6f7f8 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmerAnimation 1.5s infinite;
+    border-radius: 8px; 
+  }
+  
+  @keyframes shimmerAnimation {
+    to {
+      background-position: -200% 0;
+    }
+  }
+  

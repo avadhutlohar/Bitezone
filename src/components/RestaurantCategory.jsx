@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ItemList from "./itemList";
+import ItemList from "./ItemList";
 
 const RestaurantCategory = ({ data, isOpen, setShowIndex }) => {
   const toggleAccordion = () => {
